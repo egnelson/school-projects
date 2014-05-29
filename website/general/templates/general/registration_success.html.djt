@@ -1,0 +1,15 @@
+{% extends "_base.html.djt" %}
+
+{% block content %}
+  {% if form %}
+  <h5>Thanks for registering! Now we need to set up your account.</h5>
+  <h5>First question: Are you here to look for a job, or offer jobs?</h5>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <input type="submit" value="Continue"/>
+  </form>
+  {% else %}
+  <b>Something broke.</b>
+  {% endif %}
+{% endblock %}

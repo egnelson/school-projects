@@ -1,0 +1,24 @@
+{% extends "_base.html.djt" %}
+
+{% load staticfiles %}
+
+{% block title %}
+<title>Sign up</title>
+{% endblock %}
+
+{% block content %}
+    {% if form %}
+    <h4>All fields are required.</h4>
+    <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit"/>
+    </form>
+    {% else %}
+      <b>Something broke.</b>
+    {% endif %}
+  <h6>Already have an account? Log in <a href={% url "general.views.login" %}>here</a>!</h6>
+{% endblock %}
+

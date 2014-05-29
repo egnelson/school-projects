@@ -1,0 +1,96 @@
+{% extends "_base.html.djt" %}
+
+{% load staticfiles %}
+
+{% block title %}
+<title>Home</title>
+{% endblock %}
+
+{% block content %}
+  <h4>Your company's jobs:</h4>
+  {% if jobs %}
+    <table>
+      <th>Position Title</th>
+      <th>Location</th>
+      <th>Public Page</th>
+      <th></th>
+      <th></th>
+      {% for job in jobs %}
+        <tr>
+          <td>{{ job.title }}</td>
+          <td>{{ job.location }}</td>
+          <td><a href="{{ job.link }}">view</a></td>
+          <td><a href="{{ job.link }}edit">edit</a></td>
+          <td><a href="{{ job.del_link }}">delete</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>You have no jobs.</p>
+  {% endif %}
+  <a href={% url "job.views.new" %}>Create new job posting</a>
+  <hr/>
+  <h4>Your company's events:</h4>
+  {% if events %}
+    <table>
+      <th>Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Location</th>
+      <th>Public Page</th>
+      <th></th>
+      <th></th>
+    {% for event in events %}
+      <tr>
+        <td>{{ event.name }}</td>
+        <td>{{ event.start }}</td>
+        <td>{{ event.end }}</td>
+        <td>{{ event.location }}</td>
+        <td><a href="{{ event.link }}">link</a></td>
+        <td><a href="{{ event.link }}edit">edit</a></td>
+        <td><a href="{{ event.del_link }}">delete</a></td>
+      </tr>
+    {% endfor %}
+    </table>
+  {% else %}
+    <p>You have no events.</p>
+  {% endif %}
+  <a href={% url "event.views.new" %}>Create new event posting</a>
+  <hr/>
+  <p><h4>Your information</h4> (<a href={% url "employer.views.edit" %}>Edit</a>)
+  <table>
+    <tr>
+      <th>Name</th>
+      <td>{{ e.name }}</td>
+    </tr>
+    <tr>
+      <th>Address</th>
+      <td>{{ e.address }}</td>
+    </tr>
+    <tr>
+      <th>Phone</th>
+      <td>{{ e.phone }}</td>
+    </tr>
+    <tr>
+      <th>Fax</th>
+      <td>{{ e.fax }}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{ e.email }}</td>
+    </tr>
+    <tr>
+      <th>Contact Name</th>
+      <td>{{ e.c_name }}</td>
+    </tr>
+    <tr>
+      <th>Contact Phone</th>
+      <td>{{ e.c_phone }}</td>
+    </tr>
+    <tr>
+      <th>Contact Email</th>
+      <td>{{ e.c_email }}</td>
+    </tr>
+  </table>
+{% endblock %}
+

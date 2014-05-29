@@ -1,0 +1,10 @@
+{% extends "_base.html.djt" %}
+
+{% block title %}
+<title>Permission error</title>
+{% endblock %}
+
+{% block content %}
+<h3>You do not have permission to perform this action.</h3>
+<a href="/home/">Home</a>
+{% endblock %}

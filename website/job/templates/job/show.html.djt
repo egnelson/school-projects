@@ -1,0 +1,41 @@
+{% extends "_base.html.djt" %}
+
+{% load staticfiles %}
+{% load mytags %}
+
+{% block title %}
+<title>View Job</title>
+{% endblock %}
+
+{% block content %}
+  {% if jobdata %}  
+    <table>
+      <tr>
+        <th>Position:</th>
+        <td>{{ jobdata.title }}</td>
+      </tr>
+      <tr>
+        <th>Description:</th>
+        <td>{{ jobdata.desc }}</td>
+      </tr>
+      <tr>
+        <th>Location:</th>
+        <td>{{ jobdata.location }}</td>
+      </tr>
+      <tr>
+        <th>Salary:</th>
+        <td>{{ jobdata.salary }}</td>
+      </tr>
+    </table>
+    {% if not user|is_anonymous and user|is_applicant %}
+      <form action="{{ watch_url }}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Watch"/>
+      </form>
+    {% elif owner %}
+      <a href={% url 'job.views.edit' job_id %}>Edit</a>
+    {% endif %}
+  {% else %}
+    <h5>Could not get data for requested job.</h5>
+  {% endif %}
+{% endblock %}

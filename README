@@ -1,0 +1,45 @@
+- Install a Fedora 20 vm
+- in the vm, open a terminal
+	- run 'su' and type in the root user's password
+	- as root run 'yum install python3 python3-pip'
+	- as root run 'python3-pip install django'
+	- run 'exit'
+	- run 'cd website'
+	- run './manage.py runserver'
+	- don't close the terminal
+
+- Open up the web browser to "localhost:8000"
+- There are jobs and users for each of the sample jobs you gave us.
+- I made some dummy events for each of the employers as well.
+- Before logging in, please test the search functionality. You can choose to search for jobs or events in the drop-down box to the left of the search bar. If you leave the text field empty, it will display all jobs or events.
+- When you're done testing the search, go to localhost:8000/admin, login (username 'admin', password 'admin'), and click on 'Users' to view all the users. All but one (asdf) is an employer.
+- Each user's password is the same as the username (of course, I wouldn't do this in a live website).
+- Go ahead and log in as one of the employers (any except admin or asdf). 
+- Play around with the jobs and events- you can create, view, edit, and delete jobs and events.
+- Log out, then log back in as 'asdf' (password 'asdf')
+- asdf should be following no jobs or events
+- Search for a job or event and click on a view link
+- At the bottom of the job/event table, there should be a button that says 'Watch'. Click on it. This creates a row in the WatchedJob (or WatchedEvent) table, and redirects back to the home page. You should see a new entry in the watched job (or event) list.
+
+WHAT I IMPLEMENTED
+- Employer: can create, update, delete jobs.
+- job seeker (signed in): can view, watch and unwatch jobs
+- job seeker (anonymous): can view jobs
+- job seeker: can view employer info (partial- no way other than knowing correct url)
+
+IMPLEMENTED EXTRA CREDIT 
+- Events and related employer functionality (create, update, delete)
+- Job seeker- watch/unwatch events
+- sign up and login for job seekers and employers
+- Administration site
+- Job and event search
+
+WHAT I IMPLEMENTED THAT WASN'T IN THE PROPOSAL
+- A searching function that appears on most pages when an applicant is browsing.
+
+WHAT I DIDN'T IMPLEMENT FULLY
+- Job seeker: view employer info pages- There are no links anywhere to the public employer pages, so only someone who knew the correct url would be able to view them.
+
+WHAT SHOULD HAVE BEEN IN THE PROPOSAL
+- Search function: there was no way to discover jobs and events in the original proposal. This is an important function of a job website, and I overlooked it.
+

@@ -1,0 +1,50 @@
+{% extends "_base.html.djt" %}
+
+{% load staticfiles %}
+
+{% block title %}
+  {% if results %}
+    <title>Search results</title>
+  {% else %}
+    <title>Search</title>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if results %}
+  <table>
+    {% if job_or_event == 'job' %}
+      <tr>
+        <th>Job Title</th>
+        <th>Location</th>
+        <th></th>
+      </tr>
+      {% for result in results %}
+        <tr>
+          <td>{{ result.title }}</td>
+          <td>{{ result.location }}</td>
+          <td><a href={{ result.link }}>View</a></td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <th>Event Title</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Location</th>
+        <th></th>
+      </tr>
+      {% for result in results %}
+        <tr>
+          <td>{{ result.name }}</td>
+          <td>{{ result.start }}</td>
+          <td>{{ result.end }}</td>
+          <td>{{ result.location }}</td>
+          <td><a href={{ result.link }}>View</a></td>
+        </tr>
+      {% endfor %}
+    {% endif %}
+  </table>
+{% endif %}
+{% endblock %}
+
