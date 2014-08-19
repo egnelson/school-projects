@@ -1,0 +1,40 @@
+A couple of notes: I think I set the capacity to 100MB (DRIVE_CAPACITY_BYTES).
+There is only one device available. The major number is hard-coded to 60 
+(MODULE_MAJOR). I built it on Arch Linux with kernel version 3.12-1.
+
+There were two parts that were very difficult: updating the function calls used,
+and adding things that weren't necessary back in version 2.6.whatever.
+
+Reading that LDD chapter and reading through their sbull driver code helped me
+understand (in general terms) how the block driver interface worked, so I put
+something together that looked reasonable. I removed the module parameters and
+only allowed one disk to be made just to simplify things.
+
+I worked on updating the function calls long enough ago that I don't remember 
+the details (which functions I had to change), but I solved those problems using
+a kernel symbol lookup website (lxr.free-electrons.com) and the 2.6 update list 
+on lwn.net.
+
+When it came time to test the driver, I got a variety of errors. First off, I 
+wasn't getting any output in dmesg. It turned out that I forgot to use the 
+module_init and module_exit macros. Then I was getting a warning from add_disk 
+in uwtrd_device_init- I think that was a problem with the size of the device and
+how I was dealing out minor numbers.
+
+I was getting another error message in dmesg. I don't remember what it was, but 
+I was looking at some existing driver code, and noticed a call to 
+blk_register_region. I googled around and found lwn.net/Articles/25711/.
+I added that into my driver to see if it would fix anything, and it did.
+
+The next problem was with my actual read/write code. In dmesg, I'd see a debug
+message that uwtrd_transfer had started, and I would get nothing after that. 
+Turns out my uwtrd_request function was doing weird things that ultimately were
+rooted in a lack of understanding of bios. So I looked in the next section of 
+that article series (lwn.net/Articles/26404/), which explained bios perfectly,
+and I fixed that.
+
+To test it, I used fdisk to make a partition table and a new partition. I made a
+new entry in /dev for the partition, and made an ext4 filesystem on it. I 
+mounted it, made files on it, unmounted it, remounted it, and they were all 
+still there.
+
