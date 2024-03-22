@@ -1,0 +1,20 @@
+{% extends "_base.html.djt" %}
+
+{% load staticfiles %}
+
+{% block title %}
+<title>Edit your profile</title>
+{% endblock %}
+
+{% block content %}
+  {% if form %}
+    <form action="" method="POST">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit"/>
+    </form>
+  {% endif %}
+{% endblock %}
+

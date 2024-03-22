@@ -1,0 +1,47 @@
+<html>
+  {% load staticfiles %}
+  <head>
+    <link rel="stylesheet" type="text/css" href={% static "css/main.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "css/table.css"%}>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    {% block title %}
+    {% endblock %}
+    {% block head_includes %}
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <a href="/login/">
+          <img src="{% static "img/headerlogo.png" %}" alt="logo" style="float:left">
+        </a>
+        {% if request.user.is_authenticated %}
+<!--        <p align="right"><a href="/home/">Home</a></p>
+        <p align="right"><a href="/logout/">Log Out</a></p> -->
+        <p><a href="/home/">Home</a></p>
+        <p><a href="/logout/">Log Out</a></p>
+        {% endif %}
+      </div>
+      <div class="content">
+        {% if searchform %}
+          <form action="/search/" method="post">
+            {% csrf_token %}
+            {{ searchform.choice }}
+            {{ searchform.search }}
+            <input type="submit" value="Search"/>
+          </form>
+        {% endif %}
+        {% if msg %}
+          <h4>{{ msg }}</h4>
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+<!--    <div class="footer">
+      <hr>
+      <p>A bunch of links to other parts of the site go here!</p>
+      <br/>
+    </div> -->
+  </body>
+</html>

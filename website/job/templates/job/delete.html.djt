@@ -1,0 +1,54 @@
+{% extends "_base.html.djt" %}
+
+{% load staticfiles %}
+
+{% block title %}
+<title>Delete event</title>
+{% endblock %}
+
+{% block content %}
+<h4>Please verify that this is the event you want to delete</h4>
+<table>
+  <tr>
+    <th>Name</th>
+    <td>{{ name }}</td>
+  </tr>
+  <tr>
+    <th>Location</th>
+    <td>{{ location }}</td>
+  </tr>
+  <tr>
+    <th>Start Date</th>
+    <td>{{ start }}</td>
+  </tr>
+  <tr>
+    <th>End Date</th>
+    <td>{{ end }}</td>
+  </tr>
+  <tr>
+    <th>Objectives</th>
+    <td>{{ objectives }}</td>
+  </tr>
+  <tr>
+    <th>Opportunities</th>
+    <td>{{ opportunities }}</td>
+  </tr>
+  <tr>
+    <th>Intended Audience</th>
+    <td>{{ audience }}</td>
+  </tr>
+  <tr>
+    <th>Host</th>
+    <td>{{ host }}</td>
+  </tr>
+  <tr>
+    <th>Event Type</th>
+    <td>{{ type }}</td>
+  </tr>
+</table>
+<h4>Click on 'Delete' <em>only</em> if this is the correct event.</h4>
+<form action="" method="post">
+{% csrf_token %}
+{{ from.as_p }}
+</form>
+{% endblock %}

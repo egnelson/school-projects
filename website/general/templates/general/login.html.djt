@@ -1,0 +1,24 @@
+{% extends "_base.html.djt" %}
+
+{% load staticfiles %}
+
+{% block title %}
+<title>Log In</title>
+{% endblock %}
+
+{% block content %}
+	{% if form %}
+    <form action="" method="post">
+    {% csrf_token %}
+    <table>
+		{{ form.as_table }}
+    </table>
+    <input type="submit" value="Log In"/>
+    </form>
+		<h6>Are you {{ alt_name }}? Log in <a href="{{ alt_redir }}">here</a>!
+		Don't have an account yet? Sign up <a href="/signup/">here</a>!</h6>
+	{% else %}
+		<b>Something broke.</b>
+	{% endif %}
+{% endblock %}
+

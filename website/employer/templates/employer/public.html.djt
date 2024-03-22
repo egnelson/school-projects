@@ -1,0 +1,27 @@
+{% extends "_base.html.djt" %}
+
+{% block title %}
+<title>{{ name }}</title>
+{% endblock %}
+
+{% block content %}
+<table>
+  <tr>
+    <th>Name</th>
+    <td>{{ name }}</td>
+  </tr>
+  <tr>
+    <th>Location</th>
+    <td>{{ location }}</td>
+  </tr>
+  <tr>
+    <th>Phone Number</th>
+    <td>{{ phone }}</td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td>{{ email }}</td>
+  </tr>
+</table>
+{% endblock %}
+
